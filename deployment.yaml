@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: tictactest
-        image: 127.0.0.1:34684/pipeline-docker-registry/tictactest:latest
+        image: 127.0.0.1:34684/tictactest:latest
         ports:
         - containerPort: 80
