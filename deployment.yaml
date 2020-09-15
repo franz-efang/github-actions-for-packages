@@ -1,167 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "3"
-    field.cattle.io/creatorId: user-q8r8m
-    field.cattle.io/publicEndpoints: '[{"addresses":["94.237.90.46"],"port":31009,"protocol":"TCP","serviceName":"default:test-nodeport","allNodes":true},{"addresses":["94.237.90.46"],"port":80,"protocol":"HTTP","serviceName":"default:ingress-cd0802ec6001fcdcf5689bfff7228c78","ingressName":"default:tic","hostname":"tic.default.94.237.90.46.xip.io","allNodes":true}]'
-  creationTimestamp: "2020-09-15T09:26:18Z"
-  generation: 8
+  name: ticta 
   labels:
-    cattle.io/creator: norman
-    workload.user.cattle.io/workloadselector: deployment-default-test
-  managedFields:
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          .: {}
-          f:field.cattle.io/creatorId: {}
-          f:field.cattle.io/publicEndpoints: {}
-        f:labels:
-          .: {}
-          f:cattle.io/creator: {}
-          f:workload.user.cattle.io/workloadselector: {}
-      f:spec:
-        f:progressDeadlineSeconds: {}
-        f:replicas: {}
-        f:revisionHistoryLimit: {}
-        f:selector:
-          f:matchLabels:
-            .: {}
-            f:workload.user.cattle.io/workloadselector: {}
-        f:strategy:
-          f:rollingUpdate:
-            .: {}
-            f:maxSurge: {}
-            f:maxUnavailable: {}
-          f:type: {}
-        f:template:
-          f:metadata:
-            f:annotations:
-              .: {}
-              f:cattle.io/timestamp: {}
-              f:field.cattle.io/ports: {}
-            f:labels:
-              .: {}
-              f:workload.user.cattle.io/workloadselector: {}
-          f:spec:
-            f:containers:
-              k:{"name":"test"}:
-                .: {}
-                f:image: {}
-                f:imagePullPolicy: {}
-                f:name: {}
-                f:ports:
-                  .: {}
-                  k:{"containerPort":8080,"protocol":"TCP"}:
-                    .: {}
-                    f:containerPort: {}
-                    f:name: {}
-                    f:protocol: {}
-                f:resources: {}
-                f:securityContext:
-                  .: {}
-                  f:allowPrivilegeEscalation: {}
-                  f:capabilities: {}
-                  f:privileged: {}
-                  f:readOnlyRootFilesystem: {}
-                  f:runAsNonRoot: {}
-                f:stdin: {}
-                f:terminationMessagePath: {}
-                f:terminationMessagePolicy: {}
-                f:tty: {}
-            f:dnsPolicy: {}
-            f:restartPolicy: {}
-            f:schedulerName: {}
-            f:securityContext: {}
-            f:terminationGracePeriodSeconds: {}
-    manager: Go-http-client
-    operation: Update
-    time: "2020-09-15T09:40:46Z"
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          f:deployment.kubernetes.io/revision: {}
-      f:status:
-        f:availableReplicas: {}
-        f:conditions:
-          .: {}
-          k:{"type":"Available"}:
-            .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-          k:{"type":"Progressing"}:
-            .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-        f:observedGeneration: {}
-        f:readyReplicas: {}
-        f:replicas: {}
-        f:unavailableReplicas: {}
-        f:updatedReplicas: {}
-    manager: kube-controller-manager
-    operation: Update
-    time: "2020-09-15T09:41:16Z"
-  name: test
-  namespace: default
-  resourceVersion: "170043"
-  selfLink: /apis/apps/v1/namespaces/default/deployments/test
-  uid: 528c1db0-0048-4e84-9a1d-d19dc1248820
+    app: tictactest
 spec:
-  progressDeadlineSeconds: 600
-  replicas: 1
-  revisionHistoryLimit: 10
+  replicas: 3
   selector:
     matchLabels:
-      workload.user.cattle.io/workloadselector: deployment-default-test
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-    type: RollingUpdate
+      app: tictactest
   template:
     metadata:
-      annotations:
-        cattle.io/timestamp: "2020-09-15T09:40:46Z"
-        field.cattle.io/ports: '[[{"containerPort":8080,"dnsName":"test-nodeport","hostPort":0,"kind":"NodePort","name":"test","protocol":"TCP","sourcePort":0}]]'
-      creationTimestamp: null
       labels:
-        workload.user.cattle.io/workloadselector: deployment-default-test
+        app: tictactest
     spec:
       containers:
-      - image: docker-registry.p-s578s-pipeline/tictactest
-        imagePullPolicy: Always
-        name: test
+      - name: tictactest
+        image: tictactest:latest
         ports:
-        - containerPort: 8080
-          name: test
-          protocol: TCP
-        resources: {}
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities: {}
-          privileged: false
-          readOnlyRootFilesystem: false
-          runAsNonRoot: false
-        stdin: true
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        tty: true
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-
+        - containerPort: 80
