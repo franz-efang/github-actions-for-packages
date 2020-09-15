@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: tictactest
-        image: docker-registry.p-jbmsq-pipeline/tictactest:latest
+        image: docker-registry/tictactest:latest
         ports:
         - containerPort: 80
