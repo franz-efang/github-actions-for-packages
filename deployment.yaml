@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: tictactest
-        image: tictactest
+        image: admin/tictactest
         ports:
         - containerPort: 80
