@@ -72,4 +72,4 @@ jobs:
         RANCHER_SECRET_KEY: '74v2w8h9zgtxc69x9mz954g5xzcf5p69spxvfvf6w4stjmsz2c8mx9'
         RANCHER_URL_API: 'https://rancher.abicrash.com/v3/project/c-h9b9n:p-s578s/workloads/deployment:default:frontend'
         SERVICE_NAME: 'frontend'
-        DOCKER_IMAGE: 'franz-efang/github-actions-for-packages/tic-tac-toe:latest'
+        DOCKER_IMAGE: 'docker.pkg.github.com/franz-efang/github-actions-for-packages/tic-tac-toe:latest'
