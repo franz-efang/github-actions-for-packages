@@ -1,0 +1,9 @@
+stages:
+- name: compile
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: tictactest
+timeout: 60
+notification: {}
