@@ -60,3 +60,7 @@ jobs:
         repository: franz-efang/github-actions-for-packages/tic-tac-toe
         tag_with_sha: true
         tags: latest
+    - name: curl
+      uses: wei/curl@v1
+      with:
+        args: -u "token-7lx98:54vfwn9lg8cs57bbd76tm8bgfx52xht7r4ddd5qwsv762qmqx6cbt6" -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' 'https://rancher.abicrash.com/v3/project/c-h9b9n:p-s578s/workloads/deployment:default:tictactest?action=redeploy'
