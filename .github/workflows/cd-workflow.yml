@@ -5,10 +5,59 @@ name: Docker CD
 on:
   push:
 jobs:
-  curl:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: curl
-      uses: wei/curl@master
+      - uses: actions/checkout@v1
+      - name: npm install and build webpack
+        run: |
+          npm install
+          npm run build
+      - uses: actions/upload-artifact@master
+        with:
+          name: webpack artifacts
+          path: public/
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        os: [ubuntu-lastest, windows-2016]
+        node-version: [12.x, 14.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/download-artifact@master
+        with:
+          name: webpack artifacts
+          path: public
+      - name: npm install, and test
+        run: |
+          npm install
+          npm test
+        env:
+          CI: true
+  Build-and-Push-Docker-Image:
+    runs-on: ubuntu-latest
+    needs: test
+    name: Docker Build, Tag, Push
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Download built artifact
+      uses: actions/download-artifact@master
       with:
-        args: -X POST https://hub.docker.com/api/build/v1/source/8acea5d0-061f-4343-b521-cc7094a10a9e/trigger/7485a56c-2f6f-4330-8da8-c275667d0244/call/
+        name: webpack artifacts
+        path: public
+    - name: Build container image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{github.actor}}
+        password: ${{secrets.GITHUB_TOKEN}}
+        registry: docker.pkg.github.com
+        repository: franz-efang/github-actions-for-packages/tic-tac-toe
+        tag_with_sha: true
+        tags: name/app:latest
