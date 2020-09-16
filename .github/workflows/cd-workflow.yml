@@ -60,4 +60,4 @@ jobs:
         registry: docker.pkg.github.com
         repository: franz-efang/github-actions-for-packages/tic-tac-toe
         tag_with_sha: true
-        tags: name/app:latest
+        tags: latest
