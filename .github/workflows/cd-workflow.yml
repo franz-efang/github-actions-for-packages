@@ -54,11 +54,10 @@ jobs:
     - name: Build container image
       uses: docker/build-push-action@v1
       with:
-        username: ${{github.actor}}
-        password: ${{secrets.GITHUB_TOKEN}}
+        username: push_user
+        password: S1ed/er5g
         registry: docker.pkg.github.com
-        repository: franz-efang/github-actions-for-packages/tic-tac-toe
-        tag_with_sha: true
+        repository: harbor.abicrash.com/abicrash/frontend:0.0.1
         tags: latest
     - name: curl
       uses: wei/curl@v1
