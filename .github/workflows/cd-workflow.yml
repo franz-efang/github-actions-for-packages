@@ -56,8 +56,8 @@ jobs:
       with:
         username: push_user
         password: S1ed/er5g
-        registry: docker.pkg.github.com
-        repository: harbor.abicrash.com/abicrash/frontend:0.0.1
+        registry: harbor.abicrash.com
+        repository: abicrash/frontend:0.0.1
         tags: latest
     - name: curl
       uses: wei/curl@v1
