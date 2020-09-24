@@ -57,5 +57,5 @@ jobs:
         username: push_user
         password: S1ed/er5g
         registry: harbor.abicrash.com
-        repository: abicrash/frontend:0.0.1
-        tags: latest
+        repository: abicrash/frontend
+        tags: latest,0.0.1
