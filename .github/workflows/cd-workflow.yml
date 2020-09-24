@@ -59,7 +59,3 @@ jobs:
         registry: harbor.abicrash.com
         repository: abicrash/frontend:0.0.1
         tags: latest
-    - name: curl
-      uses: wei/curl@v1
-      with:
-        args: -u ${{ secrets.RANCHER_LOGIN }}:${{ secrets.RANCHER_KEY }} -X POST -H Accept:application/json -H Content-Type:application/json https://rancher.abicrash.com/v3/project/c-h9b9n:p-s578s/workloads/deployment:default:tictactest?action=redeploy
